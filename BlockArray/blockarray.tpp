@@ -41,9 +41,9 @@ void BlockArray<T>::print() {
 	for (int i = 0; i < blocks.size(); ++i) {
 		std::cout << "Block " << i << ": ";
 		for (int j = 0; j < blocks[i]->s; ++j) {
-            std::cout << blocks[i]->arr[j] << " ";
-        }
-        std::cout << std::endl;
+            		std::cout << blocks[i]->arr[j] << " ";
+        	}
+        	std::cout << std::endl;
 	}
 }
 
