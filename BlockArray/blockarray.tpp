@@ -82,35 +82,35 @@ void BlockArray<T>::insert(int index, const T& val) {
 		throw std::out_of_range{"Index out of range."};
 	}
 	int blockIndex = index / blocks[0]->blockSize;
-    int elementIndex = index % blocks[0]->blockSize;
-    for (int i = blocks[blockIndex]->s; i > elementIndex; --i) {
-        blocks[blockIndex]->arr[i] = blocks[blockIndex]->arr[i - 1];
-    }
-    blocks[blockIndex]->arr[elementIndex] = val;
-    blocks[blockIndex]->s++;
-    if (blocks[blockIndex]->isFull()) {
-        blocks.insert(blocks.begin() + blockIndex + 1, new Block());
-        Block* nextBlock = blocks[blockIndex + 1];
-        nextBlock->arr[0] = blocks[blockIndex]->arr[blocks[blockIndex]->blockSize - 1];
-        blocks[blockIndex]->s--;
-        nextBlock->s++;
-    }
+    	int elementIndex = index % blocks[0]->blockSize;
+    	for (int i = blocks[blockIndex]->s; i > elementIndex; --i) {
+        	blocks[blockIndex]->arr[i] = blocks[blockIndex]->arr[i - 1];
+    	}
+    	blocks[blockIndex]->arr[elementIndex] = val;
+    	blocks[blockIndex]->s++;
+    	if (blocks[blockIndex]->isFull()) {
+        	blocks.insert(blocks.begin() + blockIndex + 1, new Block());
+        	Block* nextBlock = blocks[blockIndex + 1];
+        	nextBlock->arr[0] = blocks[blockIndex]->arr[blocks[blockIndex]->blockSize - 1];
+        	blocks[blockIndex]->s--;
+        	nextBlock->s++;
+    	}
 }
 
 template <typename T>
 void BlockArray<T>::erase(int index) {
-    if (index < 0 || index >= size()) {
-        throw std::out_of_range("Index out of range");
-    }
-    int blockIndex = index / blocks[0]->blockSize;
-    int elementIndex = index % blocks[0]->blockSize;
-    for (int i = elementIndex; i < blocks[blockIndex]->s - 1; ++i) {
-        blocks[blockIndex]->arr[i] = blocks[blockIndex]->arr[i + 1];
-    }
-    blocks[blockIndex]->s--;
-    if (blocks[blockIndex]->s == 0 && blocks.size() > 1) {
-        delete[] blocks[blockIndex]->arr;
-        delete blocks[blockIndex];
-        blocks.erase(blocks.begin() + blockIndex);
-    }
+    	if (index < 0 || index >= size()) {
+        	throw std::out_of_range("Index out of range");
+    	}
+    	int blockIndex = index / blocks[0]->blockSize;
+    	int elementIndex = index % blocks[0]->blockSize;
+    	for (int i = elementIndex; i < blocks[blockIndex]->s - 1; ++i) {
+        	blocks[blockIndex]->arr[i] = blocks[blockIndex]->arr[i + 1];
+    	}
+    	blocks[blockIndex]->s--;
+    	if (blocks[blockIndex]->s == 0 && blocks.size() > 1) {
+        	delete[] blocks[blockIndex]->arr;
+        	delete blocks[blockIndex];
+        	blocks.erase(blocks.begin() + blockIndex);
+    	}
 }
