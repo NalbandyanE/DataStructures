@@ -3,7 +3,7 @@
 #include <iostream>
 
 int main() {
-	int numOfCells = 1000; 
+    int numOfCells = 1000; 
     int numOfHashFunctions = 3;
 
     std::vector<std::hash<std::string>> hashFunctions(numOfHashFunctions);
@@ -24,5 +24,5 @@ int main() {
     std::cout << "Contains orange? " << result2.first << std::endl;
     std::cout << "Estimated false positive probability: " << result2.second << std::endl;
     
-	return 0;
+    return 0;
 }
